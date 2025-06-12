@@ -1,35 +1,34 @@
+
 <?php 
     require 'function.php';
-    session_start();
 
     // cek login 
-    if( isset($_POST['login'])) {
+    if (isset($_POST['login'])) {
         $email = $_POST['email'];
         $password = $_POST['password'];
 
-        // cek apakah email dan password sudah terdaftar
+        // Cek apakah email dan password sudah terdaftar
         $cekdatabase = mysqli_query($conn, "SELECT * FROM login WHERE email = '$email' and password='$password'");
 
-        // hitung jumlah data
         $hitung = mysqli_num_rows($cekdatabase);
         
-        // cek apakah ada user dengan email tersebut
-        if($hitung > 0) {
+        if ($hitung > 0) {
             $_SESSION['log'] = true;
             header('Location: index.php');
+            exit;
         } else {
             header('Location: login.php');
-        };
-    };
-
-    // jika sudah login
-    if( !isset($_SESSION['log']) ) {
-    
-    } else {
-        header('Location: index.php');
+            exit;
+        }
     }
 
+    // Jika sudah login, redirect
+    if (isset($_SESSION['log'])) {
+        header('Location: index.php');
+        exit;
+    }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

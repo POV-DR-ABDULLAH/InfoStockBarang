@@ -90,16 +90,93 @@
                                             $namabarang = $data['namabarang'];
                                             $deskripsi = $data['deskripsi'];
                                             $stock = $data['stock'];
+                                            $idb = $data['idbarang'];
                                     ?>
                                     <tr>
                                         <td><?=$i++;?></td>
                                         <td><?=$namabarang;?></td>
                                         <td><?=$deskripsi;?></td>
                                         <td><?=$stock;?></td>
-                                        <td>edit delete</td>
+                                        <td>
+                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit<?=$idb;?>">
+                                                Edit
+                                            </button>
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?=$idb;?>">
+                                                Hapus
+                                            </button>
+                                        </td>
                                     </tr>
+
+                                        <!-- Modal Edit -->
+                                        <div class="modal fade" id="edit<?=$idb;?>" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="myModalLabel">Edit Barang</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+
+                                                    <!-- Modal Body -->
+                                                    <div class="modal-body">
+                                                        <form method="POST" action="">
+                                                            <div class="mb-3">
+                                                                <label for="namabarang" class="form-label">Nama Barang</label>
+                                                                <input type="text" class="form-control" name="namabarang" value='<?=$namabarang;?>' required>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="deskripsi" class="form-label">Deskripsi</label>
+                                                                <input class="form-control" name="deskripsi" id="deskripsi" value='<?=$deskripsi;?>' required></input>
+                                                            </div>
+                                                            
+                                                            <input type="hidden" name="idb" value="<?=$idb;?>">
+
+                                                            <!-- Tombol Submit -->
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-warning" name="updatebarang">Simpan Edit</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Modal delete -->
+                                        <div class="modal fade" id="delete<?=$idb;?>" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="myModalLabel">Hapus Barang?</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+
+                                                    <!-- Modal Body -->
+                                                    <div class="modal-body">
+                                                        <form method="POST" action="">
+                                                            <div class="mb-3">
+                                                                Apakah anda yakin ingin menghapus barang "<strong><?=$namabarang;?></strong>"?
+                                                            </div>
+                                                            
+                                                            <input type="hidden" name="idb" value="<?=$idb;?>">
+
+                                                            <!-- Tombol Submit -->
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-danger" name="hapusbarang">Hapus Barang</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
                                     <?php
                                         };
+
                                     ?>
 
                                 </tbody>
